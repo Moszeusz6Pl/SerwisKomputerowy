@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  <meta http-equiv="Content-Language" content="pl" />
+  <link rel="stylesheet" href="View/style.css" type="text/css" />
+  <title>Serwis komputerowy J&K</title>
+  
+    <style type="text/css">
+/* <![CDATA[ */
+a:hover { color: yellow; background-color: yellow }
+/* ]]> */
+</style>
+  
+</head>
+
+<body>
+<div id="container">
+    
+<div id="naglowek"></div>
+	
+<div id="menu">
+<form name="input" action="zleceniaKlient.php" method="get">
+  <ul>
+  <li><a href="#"><a href="View/m_zlecenia.html" name = "MOJE_ZLECENIA">Zlecenia</a></a></li>
+  <li><a href="#"><a href="View/m_naprawy.html" name = "MOJE_NAPRAWY">Naprawy</a></a></li>
+  <li><a href="#"><a href="View/m_sprzet.html" name = "MOJE_SPRZET">Sprzęt</a></a></li>
+  <li><a href="#"><a href="View/m_ustawienia.html" name = "MOJE_USTAWIENIA">Ustawienia</a></a></li>
+  <li><a href="#"><a href="View/wyloguj.html" name = "MAIN_WYLOGUJ">Wyloguj</a></a></li>
+  </ul>
+</form>
+</div>
+	
+<div id="lewy">
+<form name="input" action="zleceniaKlient.php" method="get">
+    <dl>
+    <dt>Zarządzanie zleceniami</dt>
+	<dd><img src="View/images/ptk.jpg" alt="menu" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#"><a href="View/m_zlecenia.html" name = "ZLECENIA_POKAZ">Pokaż</a></a></dd>
+    <dd><img src="View/images/ptk.jpg" alt="menu" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#"><a href="View/m_zlecenia.html" name = "ZLECENIA_AKTUALIZACJA">Aktualizacja</a></a></dd>
+    <dd><img src="View/images/ptk.jpg" alt="menu" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#"><a href="View/m_zlecenia.html" name = "ZLECENIA_DODAJ">Dodaj</a></a></dd>
+    <dd><img src="View/images/ptk.jpg" alt="menu" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#"><a href="View/m_zlecenia.html" name = "ZLECENIA_USUN">Usuń</a></a></dd>
+    </dl>
+</form>
+<div id="bottom"></div>
+</div>
+
+
+
+<div id="srodek">
+      <h2>Lista moich zleceń
+	  <textarea id="wynik" name="wynik" rows=100% cols=100% readonly="readonly">:wynik:</textarea>
+	  </h2>
+</div>	
+
+<div id="stopka">
+<div id="copyright">Serwis komputerowy J&K</div>
+</div>
+    
+</div>    
+</body>
+</html>

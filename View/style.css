@@ -1,0 +1,192 @@
+body {
+        background-color: #f2f2f0;
+        margin: 0;
+        padding: 0;
+        text-align:center;
+    }
+
+div {
+        font: verdana 12px #000;
+        position:relative;
+    }
+a {
+		text-decoration: none;
+	}
+#container {
+		background: url(images/background.jpg);
+        margin:0 auto;
+        padding:0 0px 0 0px;
+        position:relative;
+        width:1154px;
+		height:100%;
+        text-align:left;
+        clear: both;
+		background-color:#FFFFFF;
+    }
+
+#naglowek {
+        background: #fff url(images/logo.jpg) no-repeat;
+        width:1154px;
+        height:181px;
+        margin-bottom:0px;
+    }
+#menu {
+        background: #fff url(images/pasek.jpg) no-repeat;
+        width:1154px;
+        height:33px;
+        margin-bottom:0px;
+		margin-top:-16px;
+	}
+#menu ul {
+		list-style: none;
+	}
+#menu li {
+		float: left;
+		padding-left:70px;
+		padding-top:5px;
+  		font-weight: bold;
+  		font-size: 14px;
+	}
+#menu a {
+		display: block;
+		line-height: 20px;
+		padding: 0 8px;
+		color: #fff;
+		font-weight: bold;
+	}
+#menu a:hover {
+		background: #fff;
+		color: #294b9d;
+	
+	}
+#lewy {
+        background: #fff url(images/tlo1.jpg) repeat;
+        width:160px;
+		height:100%;
+        float:left;
+		padding-left:0px;
+		margin-left:28px;
+	}
+#lewy dl {
+		margin: 0px;
+	}
+#lewy dt {
+		font-size: 12px;
+		color: #000;
+		background:url(images/menu.jpg) no-repeat;
+		font-weight: bold;
+		height:20px;
+		width:157px;
+		padding-top:6px;
+		text-align:center;
+	}
+#lewy dd {
+		font-size:13px;
+		margin-top:6px;
+		margin-left:6px;
+	}
+#lewy a {
+		font-size:14px;
+		color: #000000;
+		line-height: 150%;
+	}
+#lewy a:hover {
+		text-decoration:underline;
+}
+#bottom {
+		background: url(images/bottom.jpg) no-repeat;
+		width:160px;
+		height:8px;
+		margin-top:5px;
+}
+#srodek {
+        background: #fff url(images/tlo2.jpg) repeat;
+        width:850px;
+		height:auto;
+        float:left;
+		margin-left:45px;
+		margin-top:3px;
+		margin-bottom:20px;
+	}
+#srodek a {
+		color:#000000;
+		text-decoration:underline;
+}
+
+#srodek a2 {
+		margin-left:85px;
+		margin-bottom:20px;
+		text-indent: 15px;
+		text-align: center;
+		padding-left:180px;
+		padding-right:5px;
+		padding-top:0px;
+		padding-bottom:4px;
+		font-size:20px;
+		font-family:Verdana, Arial, Helvetica, sans-serif;
+		text-decoration:bold;
+}
+
+#srodek h2 {
+		padding-top:15px;
+		background-color:#FFFFFF;
+        font-size: 15px;
+		color: #294b9d;
+		line-height: 150%;
+		padding-left:15px;
+		margin-top:0px;
+	}
+#srodek p {
+		margin-bottom:8px;
+		text-indent: 15px;
+		text-align: left;
+		padding-left:15px;
+		padding-right:5px;
+		padding-top:0px;
+		padding-bottom:4px;
+		font-size:12px;
+		font-family:Verdana, Arial, Helvetica, sans-serif;
+	}
+	
+#srodek sub{
+		position: relative;
+		left: 370px;
+}
+#tlo2 {
+		background: url(images/tlo_2.jpg) repeat;
+		float:right;
+		width:27px;
+		height:700px;
+	}
+#stopka {
+        background: #f2f2f0 url(images/stopka.jpg) no-repeat;
+        clear:both;
+		font-size:11px;
+		font-family:Verdana, Arial, Helvetica, sans-serif;
+		height:28px;
+		color:#FFFFFF;
+		padding-top:8px;
+		padding-right:30px;
+	}
+#stopka a {
+		color: #FFFFFF;
+	}
+#stopka a:hover {
+		text-decoration:underline;
+	}
+#copyright {
+		float:left;
+		padding-left:500px;
+	}
+#design {
+		float:right;
+}
+
+#username, #password {
+    width: 200px; 
+    margin: 0 auto;
+    padding: 2px 5px;
+    border: 1px solid green;
+    outline: 3px solid #ebebeb;
+    font-size: 20px;
+}

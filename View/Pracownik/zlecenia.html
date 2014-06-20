@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  <meta http-equiv="Content-Language" content="pl" />
+  <link rel="stylesheet" href="View/style.css" type="text/css" />
+  <title>Serwis komputerowy J&K</title>
+  
+    <style type="text/css">
+/* <![CDATA[ */
+a:hover { color: yellow; background-color: yellow }
+/* ]]> */
+</style>
+  
+</head>
+
+<body>
+<div id="container">
+    
+<div id="naglowek"></div>
+	
+<div id="menu">
+<form name="input" action="zleceniaPracownik.php" method="get">
+  <ul>
+  <li><a href="#"><a href="klienciPracownik.php" name = "MAIN_KLIENCI">Klienci</a></a></li>
+  <li><a href="#"><a href="View/Pracownik/zlecenia.html" name = "MAIN_ZLECENIA">Zlecenia</a></a></li>
+  <li><a href="#"><a href="View/Pracownik/naprawy.html" name = "MAIN_NAPRAWY">Naprawy</a></a></li>
+  <li><a href="#"><a href="View/Pracownik/sprzet.html" name = "MAIN_SPRZET">Sprzęt</a></a></li>
+  <li><a href="#"><a href="View/Pracownik/czesci.html" name = "MAIN_CZESCI">Części</a></a></li>
+  <li><a href="#"><a href="View/ustawienia.html" name = "MAIN_USTAWIENIA">Ustawienia</a></a></li>
+  <li><a href="#"><a href="View/wyloguj.html" name = "MAIN_WYLOGUJ">Wyloguj</a></a></li>
+  </ul>
+</form>
+</div>
+	
+<div id="lewy">
+<form name="input" action="zleceniaPracownik.php" method="get">
+    <dl>
+    <dt>Zarządzanie zleceniami</dt>
+	<dd><img src="View/images/ptk.jpg" alt="menu" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#"><a href="View/zlecenia.html" name = "ZLECENIA_POKAZ">Pokaż</a></a></dd>
+    <dd><img src="View/images/ptk.jpg" alt="menu" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#"><a href="View/zlecenia.html" name = "ZLECENIA_AKTUALIZACJA">Aktualizacja</a></a></dd>
+    <dd><img src="View/images/ptk.jpg" alt="menu" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#"><a href="View/zlecenia.html" name = "ZLECENIA_DODAJ">Dodaj</a></a></dd>
+    <dd><img src="View/images/ptk.jpg" alt="menu" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#"><a href="View/zlecenia.html" name = "ZLECENIA_USUN">Usuń</a></a></dd>
+	
+    </dl>
+</form>
+<div id="bottom"></div>
+</div>
+
+
+
+<div id="srodek">
+      <h2>Lista zleceń
+	  <textarea id="wynik" name="wynik" rows=100% cols=100% readonly="readonly">:wynik:</textarea>
+	  </h2>
+</div>	
+
+<div id="stopka">
+<div id="copyright">Serwis komputerowy J&K</div>
+</div>
+    
+</div>    
+</body>
+</html>
