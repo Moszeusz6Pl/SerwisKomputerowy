@@ -18,18 +18,18 @@ class LogowanieFacade {
         if(($error=$service->zaloguj($username, $password))==1)
         {
             if($_SESSION['Pracownik']==1)
-                $strona="View/Pracownik/klienci.html";
+                $controller= new KlienciPracownikController();  
             else
-                $strona="View/Klient/zlecenia.html";
-            $wynik=NULL;
+                $controller= new ZleceniaKlientController();  
+            $controller->index();
         }
         else 
         {
             $strona="View/zaloguj.html";
             $wynik=$error;
+            $gui = new Gui();
+            $gui->show($strona, $wynik);
         }
-        $gui = new Gui();
-        $gui->show($strona, $wynik);
     }
     
     function wyloguj()

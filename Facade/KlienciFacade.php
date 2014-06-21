@@ -13,7 +13,7 @@ class KlienciFacade
     function pokaz()
     {
     $service = new KlienciService();
-    $wynik=$service->pokaz(1);   
+    $wynik=$service->pokaz();   
         
     $gui=new Gui();
     $gui->Show("View/Pracownik/Klienci.html", $wynik);

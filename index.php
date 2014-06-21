@@ -4,16 +4,20 @@ require_once 'mainClass.php';
 $main = new mainClass();
 
 $defaultSubpage = 'Login';
-if(!empty($_GET['subpage'])){
+if(!empty($_GET['subpage']))
+    {
     $subpage = strtolower($_GET['subpage']);
-    if(ctype_lower($subpage)){
+    if(ctype_lower($subpage))
+    {
         $subpage[0] = strtoupper($subpage[0]);
-        $dir = "controller/".$task."Controller.php";
-        if(!file_exists($dir)){
+        $dir = "Controller/".$subpage."Controller.php";
+        if(!file_exists($dir))
+        {
             $subpage = $defaultSubpage;
         }
     }
-    else {
+    else 
+    {
         $subpage = $defaultSubpage;
     }
 }
