@@ -9,10 +9,10 @@ class KlienciService
 {
     function pokaz()
     {
-        if(($link = mysql_connect('localhost', 'System', 'vfJhDDQ2PNXHsdq8'))==false)
+        if(($link = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD))==false)
             return('Brak dostepu do serwera bazy danych');
 
-        if(mysql_select_db('baza1')==false) 
+        if(mysql_select_db(DB_NAME)==false) 
             return('Nie można połączyć się z bazą danych');
 
         $query = 'SELECT * FROM Klienci';
@@ -27,5 +27,12 @@ class KlienciService
  
         mysql_close($link);
         return $result;
+    }
+    
+    function dodaj()
+    {
+        require_once "DTO/KlientDTO.php";
+        $DTO = new KlientDTO();
+        return ($DTO->Dodaj($_GET['Login'], $_GET['Haslo'], $_GET['Imie'], $_GET['Nazwisko'], $_GET['Adres'], $_GET['Email'], $_GET['Telefon']));
     }
 }

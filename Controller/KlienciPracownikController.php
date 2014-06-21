@@ -15,6 +15,12 @@ class KlienciPracownikController
         $facade=new KlienciFacade();           
         $facade->dodaj();
     }
+    
+    function dodajPotwierdz()
+    {
+        $facade=new KlienciFacade();           
+        $facade->dodajPotwierdz();
+    }
    
     function szukaj()
     {

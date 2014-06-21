@@ -25,4 +25,18 @@ class KlienciFacade
     $formularz=  file_get_contents("View/Pracownik/Klienci/Dodaj.html");
     $gui->Show("View/Pracownik/Klienci.html", $formularz);
     }
+    
+    function dodajPotwierdz()
+    {
+        $service = new KlienciService();
+        if(($wynik=$service->dodaj())==1)          
+            $this->pokaz();
+        else
+        {
+            $gui=new Gui();
+            $formularz=  file_get_contents("View/Pracownik/Klienci/Dodaj.html").$wynik;
+            $gui->Show("View/Pracownik/Klienci.html", $formularz);
+        }
+            
+    }
 }

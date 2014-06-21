@@ -9,16 +9,18 @@ class KlientDTO
 {
     function Dodaj($Login, $Haslo, $Imie, $Nazwisko, $Adres, $Email, $Telefon)
     {
-        if(($link = mysql_connect('DB_HOST', 'DB_USER', 'DB_PASSWORD'))==false)
+        if(($link = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD))==false)
                 return('Brak dostepu do serwera bazy danych');
 
-        if(mysql_select_db('DB_NAME')==false) 
+        if(mysql_select_db(DB_NAME)==false) 
             return('Nie można połączyć się z bazą danych');
 
-        $query = 'SELECT COUNT(*) FROM "KLIENCI"';
+        $query = 'SELECT COUNT(*) FROM KLIENCI';
         if(($result = mysql_query($query))==false)
             return('Baza danych nie odpowiada na zapytanie '. $query);
-        $query = 'INSERT INTO KLIENCI VALUES('.mysql_fetch_field($result).', '. $Login.', '.$Haslo.', '.$Imie.', '.$Nazwisko.', '.$Adres.', '.$Email.', '. $Telefon.')';
+        $id=mysql_fetch_row($result);
+        $id=$id[0]+1;
+        $query = 'INSERT INTO KLIENCI VALUES('.$id.', "'. $Login.'", "'.$Haslo.'", "'.$Imie.'", "'.$Nazwisko.'", "'.$Adres.'", "'.$Email.'", '. $Telefon.')';
         mysql_free_result($result);
         if(($result = mysql_query($query))==false)
             return('Baza danych nie odpowiada na zapytanie '. $query);
