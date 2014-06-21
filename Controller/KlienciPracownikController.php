@@ -36,13 +36,13 @@ class KlienciPracownikController
     
     function wyloguj()
     {
-            $facade=new LogowanieFacade();
-            $facade->wyloguj();
+        $facade=new LogowanieFacade();
+        $facade->wyloguj();
     }
     
     function index()
     {
-           $facade=new KlienciFacade();           
-           $facade->pokaz();
+        $facade=new KlienciFacade();           
+        $facade->pokaz();
     }
 }

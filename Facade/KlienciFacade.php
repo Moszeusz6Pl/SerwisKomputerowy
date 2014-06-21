@@ -22,6 +22,7 @@ class KlienciFacade
     function dodaj()
     {
     $gui=new Gui();
-    $gui->Show("View/Pracownik/Klienci.html", "View/Pracownik/Klienci/Dodaj.html");
+    $formularz=  file_get_contents("View/Pracownik/Klienci/Dodaj.html");
+    $gui->Show("View/Pracownik/Klienci.html", $formularz);
     }
 }
