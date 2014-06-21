@@ -16,7 +16,7 @@ class LoginController {
         $facade->zaloguj();
     }
     
-    function show()
+    function index()
     {
         $gui = new Gui();
         $gui->Show("View/zaloguj.html",NULL);
