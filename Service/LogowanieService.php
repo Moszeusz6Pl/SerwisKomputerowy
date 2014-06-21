@@ -9,19 +9,19 @@ class LogowanieService {
     
     function zaloguj($username, $password)
     {
-        if($username=="Pracownik")
+        if($username==DB_EMPLOYEE)
         {
-            if(($link = mysql_connect('localhost', 'Pracownik', $password))==false)
+            if(($link = mysql_connect(DB_HOST, DB_EMPLOYEE, $password))==false)
                 return('Niepoprawne haslo do konta pracownika');
             $_SESSION['Pracownik']=1;
         }
         else
         {
-            if(($link = mysql_connect('localhost', 'System', 'vfJhDDQ2PNXHsdq8'))==false)
+            if(($link = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD))==false)
                 return('Brak dostepu do serwera bazy danych');
              $_SESSION['Pracownik']=0;
 
-            if(mysql_select_db('baza1')==false) 
+            if(mysql_select_db(DB_NAME)==false) 
                 return('Nie można połączyć się z bazą danych');
 
             $query = 'SELECT Haslo FROM Klienci WHERE Login="'.$username.'"';
