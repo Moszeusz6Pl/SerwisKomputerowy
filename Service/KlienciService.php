@@ -16,11 +16,11 @@ class KlienciService
             return('Nie można połączyć się z bazą danych');
 
         $query = 'SELECT * FROM Klienci';
-        $result='<table>';
+        $result='<table border="5"><td>Id</td><td>Login</td><td>Imie</td><td>Nazwisko</td><td>Adres</td><td>e-mail</td><td>telefon</td></tr>';
         $odpowiedz = mysql_query($query);
         while ($wiersz = mysql_fetch_row($odpowiedz)) 
         {
-              $result=$result. '<tr><td>'. $wiersz[0] .'</td><td>'. $wiersz[1] .'</td><td>'. $wiersz[2] .'</td><td>'. $wiersz[3] .'</td></tr>'. $wiersz[4] .'</td><td>'. $wiersz[5] .'</td><td>'. $wiersz[6] .'</td><td>'.$wiersz[7] .'</td></tr>' ;
+              $result=$result. '<tr><td>'. $wiersz[0] .'</td><td>'. $wiersz[1] .'</td><td>'. $wiersz[3] .'</td><td>'. $wiersz[4] .'</td><td>'. $wiersz[5] .'</td><td>'. $wiersz[6] .'</td><td>'.$wiersz[7] .'</td></tr>' ;
         }
         $result=$result. '<table>';
         mysql_free_result($odpowiedz);
