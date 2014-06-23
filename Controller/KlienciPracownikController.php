@@ -8,7 +8,7 @@ require_once "Facade/KlienciFacade.php";
  * @author Mateusz Jurasz
  */
 class KlienciPracownikController
-{
+{    
     function index()
     {
         $facade=new KlienciFacade();           
@@ -51,6 +51,7 @@ class KlienciPracownikController
         $facade->dodajPotwierdz();
     }
     
+    //to do
     function pokazZlecenia()
     {
         $facade=new KlienciFacade();           

@@ -36,8 +36,8 @@ class KlienciFacade
         else
         {
             $gui=new Gui();
-            $formularz=  file_get_contents("View/Pracownik/Klienci/Szukaj.html").$wynik;
-            $gui->Show("View/Pracownik/Klienci.html", $formularz);
+            $formularz =  file_get_contents("View/Pracownik/Klienci/Szukaj.html").'<br>'. $wynik;
+            $gui->Show("View/Pracownik/Klienci.html", $formularz); 
         }
             
     }
@@ -45,38 +45,35 @@ class KlienciFacade
     function szukaj()
     {
     $gui=new Gui();
-    $formularz=  file_get_contents("View/Pracownik/Klienci/Szukaj.html");
+    $formularz =  file_get_contents("View/Pracownik/Klienci/Szukaj.html");
     $gui->Show("View/Pracownik/Klienci.html", $formularz);
     }
     
     function szukajPotwierdz()
     {
         $service = new KlienciService();
-        if(($wynik=$service->szukaj())==1)          
-            $this->pokaz();
-        else
-        {
-            $gui=new Gui();
-            $formularz=  file_get_contents("View/Pracownik/Klienci/Szukaj.html").$wynik;
-            $gui->Show("View/Pracownik/Klienci.html", $formularz);
-        }
-            
+        $wynik=$service->szukaj();         
+        $gui=new Gui();
+        $formularz =  file_get_contents("View/Pracownik/Klienci/Szukaj.html").'<br>'. $wynik;
+        $gui->Show("View/Pracownik/Klienci.html", $formularz);           
     }
     
     function dodaj()
     {
     $gui=new Gui();
-    $formularz=  file_get_contents("View/Pracownik/Klienci/Dodaj.html");
+    $formularz =  file_get_contents("View/Pracownik/Klienci/Dodaj.html");
     $gui->Show("View/Pracownik/Klienci.html", $formularz);
     }
     
     function dodajPotwierdz()
     {
         $service = new KlienciService();
-        $wynik=$service->dodaj();         
+        $wynik=$service->dodaj();  
+
+        $wynik2=$service->pokaz();
         
         $gui=new Gui();
-        $gui->Show("View/Pracownik/Klienci.html", $wynik);
+        $gui->Show("View/Pracownik/Klienci.html", $wynik2.$wynik);
             
     }
 }

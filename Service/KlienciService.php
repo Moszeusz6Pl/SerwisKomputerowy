@@ -173,87 +173,15 @@ class KlienciService
     
     function edytuj()
     {
-        if(($link = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD))==false)
-            return('Brak dostepu do serwera bazy danych');
-
-        if(mysql_select_db(DB_NAME)==false) 
-            return('Nie można połączyć się z bazą danych');
-
-        $count=0;
-        
-        //Zmiana danych klienta w bazie danych
-        $query = 'Update Klienci ';
-        
-        //Wyszukiwanie Loginu
-        if(!empty($_GET['Login']))
-        {
-            $query = $query . ' Set Login = "'.$_GET['Login'].'"';
-            $count = $count + 1;
-        }
-        
-        //Wyszukiwanie Imienia
-        if(!empty($_GET['Imie']))
-        {
-            if($count == 0)
-                $query = $query . ' Set Imie = "'.$_GET['Imie'].'"';
-            else
-            $query = $query . ', Imie = "'.$_GET['Imie'].'"';
-            $count = $count + 1;
-        }
-        
-        //Wyszukiwanie Nazwiska
-        if(!empty($_GET['Nazwisko']))
-        {
-            if($count == 0)
-                $query = $query . ' Set Nazwisko = "'.$_GET['Nazwisko'].'"';
-            else
-            $query = $query . ', Nazwisko = "'.$_GET['Nazwisko'].'"';
-            $count = $count + 1;
-        }
-        
-        //Wyszukiwanie Adresu
-        if(!empty($_GET['Adres']))
-        {
-            if($count == 0)
-                $query = $query . ' Set Adres = "'.$_GET['Adres'].'"';
-            else
-            $query = $query . ', Adres = "'.$_GET['Adres'].'"';
-            $count = $count + 1;
-        }
-        
-        //Wyszukiwanie e-mailu
-        if(!empty($_GET['Email']))
-        {
-            if($count == 0)
-                $query = $query . ' Set Email = "'.$_GET['Email'].'"';
-            else
-            $query = $query . ', Email = "'.$_GET['Email'].'"';
-            $count = $count + 1;
-        }
-        
-        //Wyszukiwanie Telefonu
-        if(!empty($_GET['Telefon']))
-        {
-            if($count == 0)
-                $query = $query . ' Set Telefon = '.$_GET['Telefon'];
-            else
-            $query = $query . ', Telefon = '.$_GET['Telefon'];
-            $count = $count + 1;
-        }
-        
-        $query = $query . ' Where idKlienta = ' . $_GET['idKlienta'];
-        
-        echo $query;
-        
-        $odpowiedz = mysql_query($query);
-        mysql_free_result($odpowiedz);
-        mysql_close($link);
+        require_once "DTO/KlientDTO.php";
+        $DTO = new KlientDTO();
+        return($DTO->Edytuj(($_GET['idKlienta']), $_GET['Login'], $_GET['Imie'], $_GET['Nazwisko'], $_GET['Adres'], $_GET['Email'], $_GET['Telefon']));
     }
     
     function dodaj()
     {
         require_once "DTO/KlientDTO.php";
         $DTO = new KlientDTO();
-        return ($DTO->Dodaj($_GET['Login'], $_GET['Haslo'], $_GET['Imie'], $_GET['Nazwisko'], $_GET['Adres'], $_GET['Email'], $_GET['Telefon']));
+        return($DTO->Dodaj($_GET['Login'], $_GET['Haslo'], $_GET['Imie'], $_GET['Nazwisko'], $_GET['Adres'], $_GET['Email'], $_GET['Telefon']));
     }
 }
