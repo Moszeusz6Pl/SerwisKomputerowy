@@ -20,7 +20,7 @@ class KlienciService
         $odpowiedz = mysql_query($query);
         while ($wiersz = mysql_fetch_row($odpowiedz)) 
         {
-              $result=$result. '<tr><td><input type="radio" name="idKlienta" value="'. $wiersz[0] .'"/></td><td>'. $wiersz[0] .'</td><td>'. $wiersz[1] .'</td><td>'. $wiersz[2] .'</td><td>'. $wiersz[3] .'</td><td>'. $wiersz[4] .'</td><td>'. $wiersz[5] .'</td><td>'.$wiersz[6] .'</td></tr>' ;
+              $result=$result. '<tr><td><input type="radio" name="idKlienta" value='. $wiersz[0] .' id='. $wiersz[0] .'/></td><td>'. $wiersz[0] .'</td><td>'. $wiersz[1] .'</td><td>'. $wiersz[2] .'</td><td>'. $wiersz[3] .'</td><td>'. $wiersz[4] .'</td><td>'. $wiersz[5] .'</td><td>'.$wiersz[6] .'</td></tr>' ;
         }
         $result=$result. '<table>';
         mysql_free_result($odpowiedz);
@@ -119,6 +119,47 @@ class KlienciService
  
         mysql_close($link);
         return $result;
+    }
+    
+    function edytujWyswietl()
+    {
+        if(($link = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD))==false)
+            return('Brak dostepu do serwera bazy danych');
+
+        if(mysql_select_db(DB_NAME)==false) 
+            return('Nie można połączyć się z bazą danych');
+
+        
+        if ($_GET['idKlienta']==1);
+        $id = ('input[name="idKlienta"]:checked');
+        $query = 'SELECT Login, Imie, Nazwisko, Adres, "E-mail", Telefon FROM Klienci Where idKlienta ='.$_GET('idKlienta');
+        $odpowiedz = mysql_query($query);
+        
+        $wiersz = mysql_fetch_row($odpowiedz);
+        $html=file_get_contents("View/Pracownik/Klienci/Edytuj.html");
+        $search = array(":LOGIN:");
+        $replace = array('"'.$wiersz[0].'"');
+        $html = str_replace($search, $replace, $html);
+        $search = array(":IMIE:");
+        $replace = array('"'.$wiersz[1].'"');
+        $html = str_replace($search, $replace, $html);
+        $search = array(":NAZWISKO:");
+        $replace = array('"'.$wiersz[2].'"');
+        $html = str_replace($search, $replace, $html);
+        $search = array(":ADRES:");
+        $replace = array('"'.$wiersz[3].'"');
+        $html = str_replace($search, $replace, $html);
+        $search = array(":EMAIL:");
+        $replace = array('"'.$wiersz[4].'"');
+        $html = str_replace($search, $replace, $html);
+        $search = array(":TELEFON:");
+        $replace = array('"'.$wiersz[5].'"');
+        $html = str_replace($search, $replace, $html);
+        
+        mysql_free_result($odpowiedz);
+ 
+        mysql_close($link);
+        return $html;
     }
     
     function dodaj()

@@ -19,6 +19,29 @@ class KlienciFacade
     $gui->Show("View/Pracownik/Klienci.html", $wynik);
     }
     
+    function edytuj()
+    {
+    $service = new KlienciService();
+    $wynik=$service->edytujWyswietl();
+        
+    $gui=new Gui();
+    $gui->Show("View/Pracownik/Klienci.html", $wynik);
+    }
+    
+    function edytujPotwierdz()
+    {
+        $service = new KlienciService();
+        if(($wynik=$service->edytuj())==1)          
+            $this->pokaz();
+        else
+        {
+            $gui=new Gui();
+            $formularz=  file_get_contents("View/Pracownik/Klienci/Szukaj.html").$wynik;
+            $gui->Show("View/Pracownik/Klienci.html", $formularz);
+        }
+            
+    }
+    
     function szukaj()
     {
     $gui=new Gui();

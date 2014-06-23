@@ -15,6 +15,18 @@ class KlienciPracownikController
         $facade->pokaz();
     }
     
+    function edytuj()
+    {
+        $facade=new KlienciFacade();           
+        $facade->edytuj();
+    }
+    
+    function edytujPotwierdz()
+    {
+        $facade=new KlienciFacade();           
+        $facade->edytujPotwierdz();
+    }
+    
     function szukaj()
     {
         $facade=new KlienciFacade();           
@@ -39,16 +51,10 @@ class KlienciPracownikController
         $facade->dodajPotwierdz();
     }
     
-    function usun()
-    {
-            $facade=new KlienciFacade();           
-            $facade->usuń();
-    }
-    
-    function modyfiukuj()
+    function pokazZlecenia()
     {
         $facade=new KlienciFacade();           
-        $facade->modyfikuj();
+        $facade->dodajPotwierdz();
     }
     
     function wyloguj()
