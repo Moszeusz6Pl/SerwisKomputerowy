@@ -175,7 +175,7 @@ class KlienciService
     {
         require_once "DTO/KlientDTO.php";
         $DTO = new KlientDTO();
-        return($DTO->Edytuj(($_GET['idKlienta']), $_GET['Login'], $_GET['Imie'], $_GET['Nazwisko'], $_GET['Adres'], $_GET['Email'], $_GET['Telefon']));
+        return($DTO->Edytuj($_GET['idKlienta'], $_GET['Login'], $_GET['Imie'], $_GET['Nazwisko'], $_GET['Adres'], $_GET['Email'], $_GET['Telefon']));
     }
     
     function dodaj()
