@@ -10,13 +10,13 @@ require_once "View/Gui.php";
  */
 class KlienciFacade
 {
-    function pokaz()
+    function pokaz($error=NULL)
     {
     $service = new KlienciService();
     $wynik=$service->pokaz();   
         
     $gui=new Gui();
-    $gui->Show("View/Pracownik/Klienci.html", $wynik);
+    $gui->Show("View/Pracownik/Klienci.html", $wynik, $error);
     }
     
     function edytuj()
@@ -68,12 +68,9 @@ class KlienciFacade
     function dodajPotwierdz()
     {
         $service = new KlienciService();
-        $wynik=$service->dodaj();  
-
-        $wynik2=$service->pokaz();
+        if(($wynik=$service->dodaj())==1)
+            $wynik=NULL;
         
-        $gui=new Gui();
-        $gui->Show("View/Pracownik/Klienci.html", $wynik2.$wynik);
-            
+        $this->pokaz($wynik);           
     }
 }

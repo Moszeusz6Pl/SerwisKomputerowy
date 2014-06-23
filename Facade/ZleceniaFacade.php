@@ -10,38 +10,38 @@ require_once "View/Gui.php";
  */
 class ZleceniaFacade
 {
-    function pokazKlient()
+    function pokazKlient($error=NULL)
     {
     $service = new ZleceniaService();
     $wynik=$service->szukaj();   
         
     $gui=new Gui();
-    $gui->Show("View/Klient/Zlecenia.html", $wynik);
+    $gui->Show("View/Klient/Zlecenia.html", $wynik, $error);
     }
     
-    function pokazPracownik()
+    function pokazPracownik($error=NULL)
     {
     $service = new ZleceniaService();
     $wynik=$service->pokaz();   
         
     $gui=new Gui();
-    $gui->Show("View/Pracownik/Zlecenia.html", $wynik);
+    $gui->Show("View/Pracownik/Zlecenia.html", $wynik, $error);
     }
     
+    //to do
     function edytuj()
     {
-    $service = new KlienciService();
+    $service = new ZleceniaService();
     $wynik=$service->edytujWyswietl();
         
-    $gui=new Gui();
-    $gui->Show("View/Pracownik/Klienci.html", $wynik);
+    $this->pokazPracownik($wynik);
     }
     
     function edytujPotwierdz()
     {
-        $service = new KlienciService();
+        $service = new ZleceniaService();
         if(($wynik=$service->edytuj())==1)          
-            $this->pokaz();
+            $this->pokazPracownik();
         else
         {
             $gui=new Gui();
@@ -76,11 +76,10 @@ class ZleceniaFacade
     
     function dodajPotwierdz()
     {
-        $service = new KlienciService();
-        $wynik=$service->dodaj();         
+        $service = new ZleceniaService();
+        if(($wynik=$service->dodaj())==1)
+            $wynik=NULL;
         
-        $gui=new Gui();
-        $gui->Show("View/Pracownik/Zlecenia.html", $wynik);
-            
+        $this->pokazPracownik($wynik);           
     }
 }

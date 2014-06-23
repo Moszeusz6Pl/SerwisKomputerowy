@@ -15,16 +15,48 @@ class ZlecenieDTO
         if(mysql_select_db(DB_NAME)==false) 
             return('Nie można połączyć się z bazą danych');
 
+        //Ustalam id kolejnego zlecenia
         $query = 'SELECT COUNT(*) FROM Zlecenia';
         if(($result = mysql_query($query))==false)
             return('Baza danych nie odpowiada na zapytanie '. $query);
         $id=mysql_fetch_row($result);
         $id=$id[0]+1;
-        $query = 'INSERT INTO Zlecenia VALUES('.$id.', "'. $Data.'", "'.$Status.'", "'.$idKlienta.'", "'.$Cena.'", "'.$CzasNaprawy.'", "'.$Rabat.')';
+        
+        if(strlen($idKlienta)==0)
+            return('Należy wybrać klienta');
+        
+        //Sprawdzenie czy istnieje klient o podanym id
+        $query = 'SELECT COUNT(*) FROM Klienci WHERE idKlienta='.$idKlienta;
+        if(($odpowiedz=mysql_query($query))==false)
+           return('Baza danych nie odpowiada na zapytanie '. $query);       
+        $result=mysql_fetch_row($odpowiedz);
+        if($result[0]!=1)
+            return('Nie ma klienta o id '.$idZlecenia.' lub jest wielu o tym samym id');
+        
+        //Tworzenie zapytania
+        $query = 'INSERT INTO Zlecenia VALUES('.$id.', "'. $Data.'", "'.$Status.'", "'.$idKlienta.'"';
+        
+        if(strlen($CzasNaprawy)==0)
+            $query = $query . ', NULL';
+        else
+            $query = $query . ', ' . $CzasNaprawy;
+        
+        if(strlen($Cena)==0)
+            $query = $query . ', NULL';
+        else
+            $query = $query . ', ' . $Cena;
+        
+        if(strlen($Rabat)==0)
+           $query = $query . ', 0';
+        else
+            $query = $query . ', ' . $Rabat;
+        
+        $query = $query . ')';
+        
+        //Wstawiam dane do bazy
         mysql_free_result($result);
         if(($result = mysql_query($query))==false)
             return('Baza danych nie odpowiada na zapytanie '. $query);
-        mysql_free_result($result);
         
         mysql_close($link);
         return(1);
@@ -46,75 +78,91 @@ class ZlecenieDTO
         if($result[0]!=1)
             return('Nie ma zlecenia o id '.$idZlecenia.' lub jest wielu o tym samym id');
 
+        //Sprawdzenie czy istnieje klient o podanym id
+        $query = 'SELECT COUNT(*) FROM Klienci WHERE idKlienta='.$idKlienta;
+        if(($odpowiedz=mysql_query($query))==false)
+           return('Baza danych nie odpowiada na zapytanie '. $query);       
+        $result=mysql_fetch_row($odpowiedz);
+        if($result[0]!=1)
+            return('Nie ma klienta o id '.$idZlecenia.' lub jest wielu o tym samym id');
+        
         $count=0;
         
-        //Zmiana danych klienta w bazie danych
+        //Tworzenie zapytania
         $query = 'Update Zlecenia ';
         
         //Zmiana Daty
         if(strlen($Data)>0)
         {
-            $query = $query . ' Set $Data = "'.$_GET['$Data'].'"';
+            $query = $query . ' Set Data = "'.$Data.'"';
             $count = $count + 1;
         }
         
-        //Zmiana Imienia
-        if(strlen($Status>0))
+        //Zmiana Statusu
+        if(strlen($Status)>0)
+        {
+            $Status = strtolower($Status);
+            $Status[0] = strtoupper($Status[0]);
+            if($Status == 'Przyjete' || $Status == Zakonczone || $Status == CzekaNaOdbior)
+            {
+                if($count == 0)
+                    $query = $query . ' Set Status = "'.$Status.'"';
+                else
+                $query = $query . ', Status = "'.$Status.'"';
+                $count = $count + 1;
+            }
+            else
+            {
+                
+            }
+        }
+        
+        //Zmiana ID Klienta
+        if(strlen($idKlienta)>0)
         {
             if($count == 0)
-                $query = $query . ' Set Status = "'.$_GET['$Status'].'"';
+                $query = $query . ' Set idKlienta = "'.$idKlienta.'"';
             else
-            $query = $query . ', Status = "'.$_GET['$Status'].'"';
+            $query = $query . ', idKlienta = "'.$idKlienta.'"';
             $count = $count + 1;
         }
         
-        //Zmiana Nazwiska
-        if(strlen($Nazwisko>0))
+        //Zmiana Ceny
+        if(strlen($Cena)>0)
         {
             if($count == 0)
-                $query = $query . ' Set Nazwisko = "'.$_GET['Nazwisko'].'"';
+                $query = $query . ' Set Cena = "'.$Cena.'"';
             else
-            $query = $query . ', Nazwisko = "'.$_GET['Nazwisko'].'"';
+            $query = $query . ', Cena = "'.$Cena.'"';
             $count = $count + 1;
         }
         
-        //Zmiana Adresu
-        if(strlen($Adres>0))
+        //Zmiana Czasu Naprawy
+        if(strlen($CzasNaprawy)>0)
         {
             if($count == 0)
-                $query = $query . ' Set Adres = "'.$_GET['Adres'].'"';
+                $query = $query . ' Set CzasNaprawy = "'.$CzasNaprawy.'"';
             else
-            $query = $query . ', Adres = "'.$_GET['Adres'].'"';
+            $query = $query . ', CzasNaprawy = "'.$CzasNaprawy.'"';
             $count = $count + 1;
         }
         
-        //Zmiana e-mailu
-        if(strlen($Email>0))
+        //Zmiana Rabatu
+        if(strlen($Rabat)>0)
         {
             if($count == 0)
-                $query = $query . ' Set Email = "'.$_GET['Email'].'"';
+                $query = $query . ' Set Rabat = '.$Rabat;
             else
-            $query = $query . ', Email = "'.$_GET['Email'].'"';
+            $query = $query . ', Rabat = '.$Rabat;
             $count = $count + 1;
         }
-        
-        //Zmiana Telefonu
-        if(strlen($Telefon>0))
-        {
-            if($count == 0)
-                $query = $query . ' Set Telefon = '.$_GET['Telefon'];
-            else
-            $query = $query . ', Telefon = '.$_GET['Telefon'];
-            $count = $count + 1;
-        }
-        
-        $query = $query . ' Where idKlienta = ' . $_GET['idKlienta'];
-        
+
+        //Zmiana danych klienta w bazie danych
+        $query = $query . ' Where idZlecenia = ' . $_GET['idZlecenia'];
         if(mysql_query($query)==false)
             return('Baza danych nie odpowiada na zapytanie '. $query);
         mysql_close($link);
         
         return 1;
     }
-
 }

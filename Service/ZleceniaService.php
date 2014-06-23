@@ -140,35 +140,52 @@ class ZleceniaService
 
         
         //Pobieranie danych z bazy
-        $query = 'SELECT Login, Imie, Nazwisko, Adres, Email, Telefon FROM Klienci Where idKlienta ='.$_GET['idKlienta'];
+        $query = 'SELECT Data, Status, idKlienta, Cena, CzasNaprawy, Rabat FROM Zlecenia Where idZlecenia ='.$_GET['idZlecenia'];
         $odpowiedz = mysql_query($query);              
         $wiersz = mysql_fetch_row($odpowiedz);
         
         //Wypełnienie formularza wartościami z bazy danych
-        $html=file_get_contents("View/Pracownik/Klienci/Edytuj.html");
-        $search = array(":LOGIN:");
+        $html=file_get_contents("View/Pracownik/Zlecenia/Edytuj.html");
+        $search = array(":DATA:");
         $replace = array($wiersz[0]);
         $html = str_replace($search, $replace, $html);
-        $search = array(":IMIE:");
-        $replace = array($wiersz[1]);
-        $html = str_replace($search, $replace, $html);
-        $search = array(":NAZWISKO:");
-        $replace = array($wiersz[2]);
-        $html = str_replace($search, $replace, $html);
-        $search = array(":ADRES:");
-        $replace = array($wiersz[3]);
-        $html = str_replace($search, $replace, $html);
-        $search = array(":EMAIL:");
-        $replace = array($wiersz[4]);
-        $html = str_replace($search, $replace, $html);
-        $search = array(":TELEFON:");
-        $replace = array($wiersz[5]);
-        $html = str_replace($search, $replace, $html);
-        $search = array(":IDKLIENTA:");
-        $replace = array($_GET['idKlienta']);
+        
+        $search = array(":PRZYJETE:");
+        if($wiersz[1]=="Przyjete")           
+            $replace = array("slected");
+        else
+            $replace = array(""); 
         $html = str_replace($search, $replace, $html);
         
-        mysql_free_result($odpowiedz);
+        $search = array(":CZEKA:");
+        if($wiersz[1]=="'CzekaNaOdbior")           
+            $replace = array("slected");
+        else
+            $replace = array(""); 
+        $html = str_replace($search, $replace, $html);
+        
+        $search = array(":ZAKONCZONE:");
+        if($wiersz[1]=="Zakonczone")           
+            $replace = array("slected");
+        else
+            $replace = array(""); 
+        $html = str_replace($search, $replace, $html);
+        
+        $search = array(":IDKLIENTA:");
+        $replace = array($wiersz[2]);
+        $html = str_replace($search, $replace, $html);
+        $search = array(":CENA:");
+        $replace = array($wiersz[3]);
+        $html = str_replace($search, $replace, $html);
+        $search = array(":CZASNAPRAWY:");
+        $replace = array($wiersz[4]);
+        $html = str_replace($search, $replace, $html);
+        $search = array(":RABAT:");
+        $replace = array($wiersz[5]);
+        $html = str_replace($search, $replace, $html);
+        $search = array(":IDZLECENIA:");
+        $replace = array($_GET['idZlecenia']);
+        $html = str_replace($search, $replace, $html);
  
         mysql_close($link);
         return $html;
@@ -176,87 +193,15 @@ class ZleceniaService
     
     function edytuj()
     {
-        if(($link = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD))==false)
-            return('Brak dostepu do serwera bazy danych');
-
-        if(mysql_select_db(DB_NAME)==false) 
-            return('Nie można połączyć się z bazą danych');
-
-        $count=0;
-        
-        //Zmiana danych klienta w bazie danych
-        $query = 'Update Klienci ';
-        
-        //Wyszukiwanie Loginu
-        if(!empty($_GET['Login']))
-        {
-            $query = $query . ' Set Login = "'.$_GET['Login'].'"';
-            $count = $count + 1;
-        }
-        
-        //Wyszukiwanie Imienia
-        if(!empty($_GET['Imie']))
-        {
-            if($count == 0)
-                $query = $query . ' Set Imie = "'.$_GET['Imie'].'"';
-            else
-            $query = $query . ', Imie = "'.$_GET['Imie'].'"';
-            $count = $count + 1;
-        }
-        
-        //Wyszukiwanie Nazwiska
-        if(!empty($_GET['Nazwisko']))
-        {
-            if($count == 0)
-                $query = $query . ' Set Nazwisko = "'.$_GET['Nazwisko'].'"';
-            else
-            $query = $query . ', Nazwisko = "'.$_GET['Nazwisko'].'"';
-            $count = $count + 1;
-        }
-        
-        //Wyszukiwanie Adresu
-        if(!empty($_GET['Adres']))
-        {
-            if($count == 0)
-                $query = $query . ' Set Adres = "'.$_GET['Adres'].'"';
-            else
-            $query = $query . ', Adres = "'.$_GET['Adres'].'"';
-            $count = $count + 1;
-        }
-        
-        //Wyszukiwanie e-mailu
-        if(!empty($_GET['Email']))
-        {
-            if($count == 0)
-                $query = $query . ' Set Email = "'.$_GET['Email'].'"';
-            else
-            $query = $query . ', Email = "'.$_GET['Email'].'"';
-            $count = $count + 1;
-        }
-        
-        //Wyszukiwanie Telefonu
-        if(!empty($_GET['Telefon']))
-        {
-            if($count == 0)
-                $query = $query . ' Set Telefon = '.$_GET['Telefon'];
-            else
-            $query = $query . ', Telefon = '.$_GET['Telefon'];
-            $count = $count + 1;
-        }
-        
-        $query = $query . ' Where idKlienta = ' . $_GET['idKlienta'];
-        
-        echo $query;
-        
-        $odpowiedz = mysql_query($query);
-        mysql_free_result($odpowiedz);
-        mysql_close($link);
+        require_once "DTO/ZlecenieDTO.php";
+        $DTO = new ZlecenieDTO();
+        return($DTO->Edytuj($_GET['idZlecenia'], $_GET['Data'], $_GET['Status'], $_GET['idKlienta'], $_GET['Cena'], $_GET['CzasNaprawy'], $_GET['Rabat']));
     }
     
     function dodaj()
     {
-        require_once "DTO/ZleceniaDTO.php";
-        $DTO = new ZleceniaDTO();
-        return ($DTO->Dodaj($_GET['Login'], $_GET['Haslo'], $_GET['Imie'], $_GET['Nazwisko'], $_GET['Adres'], $_GET['Email'], $_GET['Telefon']));
+        require_once "DTO/ZlecenieDTO.php";
+        $DTO = new ZlecenieDTO();
+        return ($DTO->Dodaj($_GET['Data'], $_GET['Status'], $_GET['idKlienta'], $_GET['Cena'], $_GET['CzasNaprawy'], $_GET['Rabat']));
     }
 }
