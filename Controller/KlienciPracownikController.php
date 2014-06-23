@@ -9,6 +9,23 @@ require_once "Facade/KlienciFacade.php";
  */
 class KlienciPracownikController
 {
+    function index()
+    {
+        $facade=new KlienciFacade();           
+        $facade->pokaz();
+    }
+    
+    function szukaj()
+    {
+        $facade=new KlienciFacade();           
+        $facade->szukaj();
+    }
+    
+    function szukajPotwierdz()
+    {
+        $facade=new KlienciFacade();           
+        $facade->szukajPotwierdz();
+    }
     
     function dodaj()
     {
@@ -20,12 +37,6 @@ class KlienciPracownikController
     {
         $facade=new KlienciFacade();           
         $facade->dodajPotwierdz();
-    }
-   
-    function szukaj()
-    {
-        $facade=new KlienciFacade();           
-        $facade->szukaj();
     }
     
     function usun()
@@ -44,11 +55,5 @@ class KlienciPracownikController
     {
         $facade=new LogowanieFacade();
         $facade->wyloguj();
-    }
-    
-    function index()
-    {
-        $facade=new KlienciFacade();           
-        $facade->pokaz();
     }
 }
