@@ -1,0 +1,20 @@
+<form name="input" action="index.php" method="get">
+          Nazwa:
+	  <input type="text" id="nazwaSprzet" name="nazwaSprzet" maxlength="30"> <br/>
+          Typ:    
+	  <select name="typSprzet" size="3">
+            <option selected>Komputer</option>
+            <option>Drukarka</option>
+            <option>Monitor</option>
+          </select>  <br/>
+          Opis:
+	  <input type="text" id="opisSprzet" name="opisSprzet" maxlength="200"> <br/>
+          Numer Seryjny: 
+	  <input type="text" id="nrSeryjny" name="nrSeryjny" maxlength="30"> <br/>
+          Id klienta:
+	  <input type="text" id="idKlienta" name="idKlienta" maxlength="10"> <br/>
+              
+          <input type="hidden" name="subpage" value="SprzetPracownik" />
+          
+	  <sub><button type=”submit” name="action" value="dodajPotwierdz">Dodaj</button></br></sub>
+</form>

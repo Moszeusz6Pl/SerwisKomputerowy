@@ -1,0 +1,22 @@
+<form name="input" action="index.php" method="get">
+          Nazwa:
+	  <input type="text" id="nazwaCzesci" name="nazwaCzesci" maxlength="20"> <br/>
+          Typ: 
+	  <select name="typCzesci" size="3">
+            <option selected>PlytaGlowna</option>
+            <option>KartaGraficzna</option>
+            <option>KartaSieciowa</option>
+            <option>Pamiec</option>
+            <option>DyskTwardy</option>
+            <option>NapedOptyczny</option>
+            <option>Zasilacz</option>
+          </select> <br/>
+          Opis:
+	  <input type="text" id="opisCzesci" name="opisCzesci" maxlength="100"> <br/>
+          Cena:
+	  <input type="text" id="cenaCzesci" name="cenaCzesci" maxlength="10"> <br/>
+              
+          <input type="hidden" name="subpage" value="CzesciPracownik" />
+          
+	  <sub><button type=”submit” name="action" value="dodajPotwierdz">Dodaj</button></br></sub>
+</form>

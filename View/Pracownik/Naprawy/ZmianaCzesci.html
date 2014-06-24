@@ -1,0 +1,15 @@
+<form name="input" action="index.php" method="get">
+
+          Id zlecenia:
+	  <input type="text" id="idZlecenia" name="idZlecenia" maxlength="5" value =":ID_ZLECENIA:"> <br/>
+          Id sprzetu: 
+	  <input type="text" id="idSprzetu" name="idSprzetu" maxlength="5" value=":ID_SPRZETU:"> <br/>
+          Id czesci:
+	  <input type="text" id="idCzesci" name="idCzesci" maxlength="5" value=":ID_CZESCI:"> <br/>
+             
+          <input type="hidden" name="idNaprawy" value=":IDNAPRAWY:" />
+          
+          <input type="hidden" name="subpage" value="NaprawyPracownik" />
+          
+	  <sub><button type=”submit” name="action" value="zmianaCzesciPotwierdz">Zmien czesc</button></br></sub>
+</form>

@@ -67,26 +67,20 @@ class KlientDTO
         if(($odpowiedz=mysql_query($query))==false)
            return('Baza danych nie odpowiada na zapytanie '. $query);
         
+        $result=mysql_fetch_row($odpowiedz);
+        if($result[0]!=1)
+            return('Nie ma użytkownika o id '.$idKlienta.' lub jest wielu o tym samym id');
+        
         $query = 'SELECT COUNT(*) FROM KLIENCI WHERE LOGIN="'.$Login.'"';
         if(($result = mysql_query($query))==false)
             return('Baza danych nie odpowiada na zapytanie '. $query);
         $NLogin=mysql_fetch_row($result);
         
-        if($NLogin[0]>0)
-            return('Istnieje już użytkownik o tym samym loginie, proszę wybrać inny');
-        
         if(strlen($Login)<6)
             return('Podane login jest za krótki, proszę podać dłuższy(minimum 6 znaków)');
         
-        if(strlen($Haslo)<6)
-            return('Podane hasło jest za krótkie, proszę podać dłuższe(minimum 6 znaków)');
-        
         if (preg_match("/^( [a-zA-Z0-9] )+( [a-zA-Z0-9\._-] )*@( [a-zA-Z0-9_-] )+( [a-zA-Z0-9\._-] +)+$/" , $Email))
             return('Wpisano niepoprawny adres e-mail');
-        
-        $result=mysql_fetch_row($odpowiedz);
-        if($result[0]!=1)
-            return('Nie ma użytkownika o id '.$idKlienta.' lub jest wielu o tym samym id');
 
         $count=0;
         
