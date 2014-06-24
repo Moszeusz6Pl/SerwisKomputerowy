@@ -1,11 +1,11 @@
 <?php
 
 /**
- * Klasa zapewniająca usługi dla obsługi zleceń
+ * Klasa zapewniająca usługi dla obsługi napraw
  *
  * @author Mateusz Jurasz
  */
-class ZleceniaPracownikService
+class NaprawyPracownikService
 {
     function pokaz()
     {
@@ -15,16 +15,17 @@ class ZleceniaPracownikService
         if(mysql_select_db(DB_NAME)==false) 
             return('Nie można połączyć się z bazą danych');
 
-        $query = 'SELECT * FROM Zlecenia';
-        $result='<table border="5"><th>Id</th><th>Data</th><th>Status</th><th>Id Klienta</th><th>Cena</th><th>Czas naprawy</th><th>Rabat</th><th>Edycja</th><th>Pokaż klienta</th><th>Pokaż zlecenia</th>';
+        $query = 'SELECT * FROM Naprawy';
+        $result='<table border="5"><th>Id</th><th>Status</th><th>Id Zlecenia</th><th>Id Sprzetu</th><th>Opis</th><th>Cena</th><th>Id Czesci</th><th>Edytuj</th><th>Pokaż zlecenie</th><th>Pokaż sprzęt</th><th>Pokaż część</th>';
         $odpowiedz = mysql_query($query);
         while ($wiersz = mysql_fetch_row($odpowiedz)) 
         {
               $result=$result. '<tr><td>'. $wiersz[0] .'</td><td>'. $wiersz[1] .'</td><td>'
                 . $wiersz[2] .'</td><td>'. $wiersz[3] .'</td><td>'. $wiersz[4] .'</td><td>'. $wiersz[5] .'</td><td>'.
-                $wiersz[6] .'</td><td> <a href="index.php?subpage=zleceniaPracownik&action=edytujWyswietl&idZlecenia='. $wiersz[0] .'">Edytuj</a> </td>'
-                . '<td> <a href="index.php?subpage=klienciPracownik&action=szukajPotwierdz&idKlienta='. $wiersz[3] .'">Pokaż klienta</a> </td>'
-                . '<td> <a href="index.php?subpage=naprawyPracownik&action=szukajPotwierdz&idZlecenia='. $wiersz[0] .'">Pokaż naprawy</a> </td></tr>';
+                $wiersz[6] .'</td><td> <a href="index.php?subpage=naprawyPracownik&action=edytujWyswietl&idNaprawy='. $wiersz[0] .'">Edytuj</a> </td>'
+                . '<td> <a href="index.php?subpage=zleceniaPracownik&action=szukajPotwierdz&idZlecenia='. $wiersz[2] .'">Pokaż zlecenie</a> </td>'
+                . '<td> <a href="index.php?subpage=sprzetyPracownik&action=szukajPotwierdz&idSprzetu='. $wiersz[3] .'">Pokaż sprzęt</a> </td>'
+                . '<td> <a href="index.php?subpage=czesciPracownik&action=szukajPotwierdz&idCzesci='. $wiersz[6] .'">Pokaż część</a> </td></tr>';
         }
         $result=$result. '<table>';
  

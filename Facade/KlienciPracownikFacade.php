@@ -19,13 +19,12 @@ class KlienciPracownikFacade
     $gui->Show("View/Pracownik/Klienci.html", $wynik, $error);
     }
     
-    function edytujWyswietl()
+    function edytujWyswietl($error=NULL)
     {
     $service = new KlienciPracownikService();
-    $wynik=$service->edytujWyswietl();
+    $wynik=$service->edytujWyswietl().$error;
         
-    $gui=new Gui();
-    $gui->Show("View/Pracownik/Klienci.html", $wynik);
+    $this->pokaz($wynik);
     }
     
     function edytujPotwierdz()
@@ -35,11 +34,8 @@ class KlienciPracownikFacade
             $this->pokaz();
         else
         {
-            $gui=new Gui();
-            $formularz =  file_get_contents("View/Pracownik/Klienci/Szukaj.html").'<br>'. $wynik;
-            $gui->Show("View/Pracownik/Klienci.html", $formularz); 
+            $this->edytujWyswietl($wynik);
         }
-            
     }
     
     function szukajWyswietl()
