@@ -196,9 +196,9 @@ class NaprawyPracownikService
     
     function edytujPotwierdz()
     {
-        require_once "DTO/NaprawyDTO.php";
-        $DTO = new ZlecenieDTO();
-        $wynik=$DTO->Edytuj($_GET['idNaprawy'], $_GET['Stan'], $_GET['idZlecenia'], $_GET['idSprzetu'], $_GET['Opis'], $_GET['Cena'], $_GET['idCzesci']);
+        require_once "DTO/NaprawaDTO.php";
+        $DTO = new NaprawaDTO();
+        $wynik=$DTO->Edytuj($_GET['Stan'], $_GET['idZlecenia'], $_GET['idSprzetu'], $_GET['Opis'], $_GET['Cena'], $_GET['idCzesci']);
         return($wynik);
     }
     
@@ -220,8 +220,8 @@ class NaprawyPracownikService
     
     function dodajPotwierdz()
     {
-        require_once "DTO/NaprawyeDTO.php";
-        $DTO = new ZlecenieDTO();
+        require_once "DTO/NaprawaDTO.php";
+        $DTO = new NaprawaDTO();
         return ($DTO->Dodaj($_GET['Stan'], $_GET['idZlecenia'], $_GET['idSprzetu'], $_GET['Opis'], $_GET['Cena'], $_GET['idCzesci']));
     }
 }

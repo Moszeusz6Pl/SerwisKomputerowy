@@ -1,13 +1,13 @@
 <?php
 
 /**
- * Klasa transferowa dla encji zlecenie
+ * Klasa transferowa dla encji klient
  *
  * @author Mateusz Jurasz
  */
-class ZlecenieDTO
+class NaprawaDTO
 {
-    function Dodaj($Data, $Status, $idKlienta, $Cena, $CzasNaprawy, $Rabat)
+    function Dodaj($Stan, $idZlecenia, $idSprzetu, $Opis, $Cena, $idCzesci)
     {
         if(($link = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD))==false)
                 return('Brak dostepu do serwera bazy danych');
@@ -15,41 +15,43 @@ class ZlecenieDTO
         if(mysql_select_db(DB_NAME)==false) 
             return('Nie można połączyć się z bazą danych');
 
-        //Ustalam id kolejnego zlecenia
-        $query = 'SELECT COUNT(*) FROM Zlecenia';
+        //Ustalam id kolejnego klienta
+        $query = 'SELECT COUNT(*) FROM Naprawy';
         if(($result = mysql_query($query))==false)
             return('Baza danych nie odpowiada na zapytanie '. $query);
         $id=mysql_fetch_row($result);
         $id=$id[0]+1;
         
-        if(strlen($idKlienta)==0)
+       if(strlen($idZlecenia)==0)
             return('Należy wybrać klienta');
         
         //Sprawdzenie czy istnieje klient o podanym id
-        $query = 'SELECT COUNT(*) FROM Klienci WHERE idKlienta='.$idKlienta;
+        $query = 'SELECT COUNT(*) FROM Zlecenia WHERE idZlecenia='.$idZlecenia;
         if(($odpowiedz=mysql_query($query))==false)
            return('Baza danych nie odpowiada na zapytanie '. $query);       
         $result=mysql_fetch_row($odpowiedz);
         if($result[0]!=1)
-            return('Nie ma klienta o id '.$idZlecenia.' lub jest wielu o tym samym id');
+            return('Nie ma zlecenia o id '.$idZlecenia.' lub jest wielu o tym samym id');
         
         //Tworzenie zapytania
-        $query = 'INSERT INTO Zlecenia VALUES('.$id.', "'. $Data.'", "'.$Status.'", "'.$idKlienta.'"';
+        $query = 'INSERT INTO Naprawy VALUES('.$id.', "'. $Stan.'", "'.$idZlecenia.'"';
         
-        if(strlen($CzasNaprawy)==0)
+        if(strlen($idSprzetu)==0)
             $query = $query . ', NULL';
         else
-            $query = $query . ', ' . $CzasNaprawy;
+            $query = $query . ', ' . $idSprzetu;
+        
+        $query = $query . ', "' . $Opis .'"';
         
         if(strlen($Cena)==0)
-            $query = $query . ', NULL';
+           $query = $query . ',""';
         else
             $query = $query . ', ' . $Cena;
         
-        if(strlen($Rabat)==0)
-           $query = $query . ', 0';
+        if(strlen($idCzesci)==0)
+            $query = $query . ', NULL';
         else
-            $query = $query . ', ' . $Rabat;
+            $query = $query . ', ' . $idCzesci;
         
         $query = $query . ')';
         
@@ -61,7 +63,7 @@ class ZlecenieDTO
         return(1);
     }
     
-    function Edytuj($idZlecenia, $Data, $Status, $idKlienta, $Cena, $CzasNaprawy, $Rabat)
+    function Edytuj($idNaprawy, $Stan, $idZlecenia, $idSprzetu, $Opis, $Cena, $idCzesci)
     {
         if(($link = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD))==false)
             return('Brak dostepu do serwera bazy danych');
@@ -69,53 +71,58 @@ class ZlecenieDTO
         if(mysql_select_db(DB_NAME)==false) 
             return('Nie można połączyć się z bazą danych');
 
-        $query = 'SELECT COUNT(*) FROM Zlecenia WHERE idZlecenia='.$idZlecenia;
+        $query = 'SELECT COUNT(*) FROM Naprawy WHERE idNaprawy='.$idNaprawy;
         if(($odpowiedz=mysql_query($query))==false)
            return('Baza danych nie odpowiada na zapytanie '. $query);
         
         $result=mysql_fetch_row($odpowiedz);
         if($result[0]!=1)
-            return('Nie ma zlecenia o id '.$idZlecenia.' lub jest wielu o tym samym id');
+            return('Nie ma zlecenia o id '.$idNaprawy.' lub jest wielu o tym samym id');
 
-        //Sprawdzenie czy istnieje klient o podanym id
-        $query = 'SELECT COUNT(*) FROM Klienci WHERE idKlienta='.$idKlienta;
+        //Sprawdzenie czy istnieje zlecenie o podanym id
+        $query = 'SELECT COUNT(*) FROM Zlecenia WHERE idZlecenia='.$idZlecenia;
         if(($odpowiedz=mysql_query($query))==false)
            return('Baza danych nie odpowiada na zapytanie '. $query);       
         $result=mysql_fetch_row($odpowiedz);
         if($result[0]!=1)
-            return('Nie ma klienta o id '.$idZlecenia.' lub jest wielu o tym samym id');
+            return('Nie ma zlecenia o id '.$idZlecenia.' lub jest wielu o tym samym id');
         
         $count=0;
         
         //Tworzenie zapytania
-        $query = 'Update Zlecenia ';
+        $query = 'Update Naprawy ';
         
-        //Zmiana Daty
-        if(strlen($Data)>0)
+        //Zmiana Stanu
+        if(strlen($Stan)>0)
         {
-            $query = $query . ' Set Data = "'.$Data.'"';
-            $count = $count + 1;
-        }
-        
-        //Zmiana Statusu
-        if(strlen($Status)>0)
-        {
-            if(($Status == 'Przyjete') || ($Status == 'Zakonczone') || ($Status == 'CzekaNaOdbior'))
+            if(($Stan == 'Przyjete') || ($Stan == 'WToku') || ($Stan == 'Zakonczone'))
             {
-                if($count == 0)
-                    $query = $query . ' Set Status = "'.$Status.'"';
-                else
-                $query = $query . ', Status = "'.$Status.'"';
+                    $query = $query . ' Set Stan = "'.$Stan.'"';
                 $count = $count + 1;
             }
         }
-        //Zmiana ID Klienta
-        if(strlen($idKlienta)>0)
+        
+        //Zmiana ID Zlecenia
+        if(strlen($idZlecenia)>0)
+        {
+            $query = $query . ' Set idZlecenia = "'.$idZlecenia.'"';
+            $count = $count + 1;
+        }
+        
+        //Zmiana ID Sprzętu
+        if(strlen($idSprzetu)>0)
+        {
+            $query = $query . ' Set idSprzetu = "'.$idSprzetu.'"';
+            $count = $count + 1;
+        }
+        
+        //Zmiana Opisu
+        if(strlen($Opis)>0)
         {
             if($count == 0)
-                $query = $query . ' Set idKlienta = "'.$idKlienta.'"';
+                $query = $query . ' Set Opis = "'.$Opis.'"';
             else
-            $query = $query . ', idKlienta = "'.$idKlienta.'"';
+            $query = $query . ', Opis = "'.$Opis.'"';
             $count = $count + 1;
         }
         
@@ -129,28 +136,18 @@ class ZlecenieDTO
             $count = $count + 1;
         }
         
-        //Zmiana Czasu Naprawy
-        if(strlen($CzasNaprawy)>0)
+        //Zmiana ID Części
+        if(strlen($idCzesci)>0)
         {
             if($count == 0)
-                $query = $query . ' Set CzasNaprawy = "'.$CzasNaprawy.'"';
+                $query = $query . ' Set idCzesci = "'.$idCzesci.'"';
             else
-            $query = $query . ', CzasNaprawy = "'.$CzasNaprawy.'"';
-            $count = $count + 1;
-        }
-        
-        //Zmiana Rabatu
-        if(strlen($Rabat)>0)
-        {
-            if($count == 0)
-                $query = $query . ' Set Rabat = '.$Rabat;
-            else
-            $query = $query . ', Rabat = '.$Rabat;
+            $query = $query . ', idCzesci = "'.$idCzesci.'"';
             $count = $count + 1;
         }
 
         //Zmiana danych klienta w bazie danych
-        $query = $query . ' Where idZlecenia = ' . $_GET['idZlecenia'];
+        $query = $query . ' Where idNaprawy = ' . $_GET['idNaprawy'];
         if(mysql_query($query)==false)
             return('Baza danych nie odpowiada na zapytanie '. $query);
         mysql_close($link);
