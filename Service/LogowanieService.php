@@ -30,7 +30,6 @@ class LogowanieService {
             $row = mysql_fetch_object($result);
             if($password==NULL || $row->Haslo!=$password)
                 return('Zła nazwa urzytkownika lub hasło');
-            mysql_free_result($result);
         }
  
         mysql_close($link);

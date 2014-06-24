@@ -44,10 +44,8 @@ class KlientDTO
             $query = 'INSERT INTO KLIENCI VALUES('.$id.', "'. $Login.'", "'.$Haslo.'", "'.$Imie.'", "'.$Nazwisko.'", "'.$Adres.'", "'.$Email.'", "")';
         else
             $query = 'INSERT INTO KLIENCI VALUES('.$id.', "'. $Login.'", "'.$Haslo.'", "'.$Imie.'", "'.$Nazwisko.'", "'.$Adres.'", "'.$Email.'", '. $Telefon.')';
-        mysql_free_result($result);
         if(($result = mysql_query($query))==false)
             return('Baza danych nie odpowiada na zapytanie '. $query);
-        mysql_free_result($result);
         
         mysql_close($link);
         return(1);

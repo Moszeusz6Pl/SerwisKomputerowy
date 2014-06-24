@@ -1,6 +1,6 @@
 <?php
 
-require_once "Facade/KlienciFacade.php";
+require_once "Facade/KlienciPracownikFacade.php";
 
 /**
  * Klasa odpowiedzialna za obsługę zdarzeń w podstronie Klienci dla Pracownika
@@ -11,50 +11,50 @@ class KlienciPracownikController
 {    
     function index()
     {
-        $facade=new KlienciFacade();           
+        $facade=new KlienciPracownikFacade();           
         $facade->pokaz();
     }
     
-    function edytuj()
+    function edytujWyswietl()
     {
-        $facade=new KlienciFacade();           
+        $facade=new KlienciPracownikFacade();           
         $facade->edytuj();
     }
     
     function edytujPotwierdz()
     {
-        $facade=new KlienciFacade();           
+        $facade=new KlienciPracownikFacade();           
         $facade->edytujPotwierdz();
     }
     
-    function szukaj()
+    function szukajWyswietl()
     {
-        $facade=new KlienciFacade();           
-        $facade->szukaj();
+        $facade=new KlienciPracownikFacade();           
+        $facade->szukajWyswietl();
     }
     
     function szukajPotwierdz()
     {
-        $facade=new KlienciFacade();           
+        $facade=new KlienciPracownikFacade();           
         $facade->szukajPotwierdz();
     }
     
-    function dodaj()
+    function dodajWyswietl()
     {
-        $facade=new KlienciFacade();           
-        $facade->dodaj();
+        $facade=new KlienciPracownikFacade();           
+        $facade->dodajWyswietl();
     }
     
     function dodajPotwierdz()
     {
-        $facade=new KlienciFacade();           
+        $facade=new KlienciPracownikFacade();           
         $facade->dodajPotwierdz();
     }
     
     //to do
     function pokazZlecenia()
     {
-        $facade=new KlienciFacade();           
+        $facade=new KlienciPracownikFacade();           
         $facade->dodajPotwierdz();
     }
     

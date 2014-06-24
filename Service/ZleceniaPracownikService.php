@@ -5,7 +5,7 @@
  *
  * @author Mateusz Jurasz
  */
-class ZleceniaService
+class ZleceniaPracownikService
 {
     function pokaz()
     {
@@ -27,7 +27,6 @@ class ZleceniaService
                 . '<td> <a href="index.php?subpage=naprawyPracownik&action=szukajPotwierdz&idZlecenia='. $wiersz[0] .'">Pokaż naprawy</a> </td></tr>';
         }
         $result=$result. '<table>';
-        mysql_free_result($odpowiedz);
  
         mysql_close($link);
         return $result;
@@ -123,7 +122,6 @@ class ZleceniaService
                 . '<td> <a href="index.php?subpage=naprawyPracownik&action=szukajPotwierdz&idZlecenia='. $wiersz[0] .'">Pokaż naprawy</a> </td></tr>';
         }
         $result=$result. '<table>';
-        mysql_free_result($odpowiedz);
  
         mysql_close($link);
         return $result;

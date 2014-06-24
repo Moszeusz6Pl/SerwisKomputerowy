@@ -5,7 +5,7 @@
  *
  * @author Mateusz Jurasz
  */
-class KlienciService
+class KlienciPracownikService
 {
     function pokaz()
     {
@@ -22,17 +22,16 @@ class KlienciService
         {
               $result=$result. '<tr><td>'. $wiersz[0] .'</td><td>'. $wiersz[1] .'</td><td>'
                 . $wiersz[2] .'</td><td>'. $wiersz[3] .'</td><td>'. $wiersz[4] .'</td><td>'. $wiersz[5] .'</td><td>'.
-                $wiersz[6] .'</td><td> <a href="index.php?subpage=klienciPracownik&action=edytuj&idKlienta='. $wiersz[0] .'">Edytuj</a> </td>'
+                $wiersz[6] .'</td><td> <a href="index.php?subpage=klienciPracownik&action=edytujWyswietl&idKlienta='. $wiersz[0] .'">Edytuj</a> </td>'
                 . '<td> <a href="index.php?subpage=zleceniaPracownik&action=szukajPotwierdz&idKlienta='. $wiersz[0] .'">Pokaż zlecenia</a> </td></tr>' ;
         }
         $result=$result. '<table>';
-        mysql_free_result($odpowiedz);
  
         mysql_close($link);
         return $result;
     }
     
-    function szukaj()
+    function szukajPotwierdz()
     {
         if(($link = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD))==false)
             return('Brak dostepu do serwera bazy danych');
@@ -121,7 +120,6 @@ class KlienciService
                 . '<td> <a href="index.php?subpage=zleceniaPracownik&action=szukajPotwierdz&idKlienta='. $wiersz[0] .'">Pokaż zlecenia</a> </td></tr>' ;
         }
         $result=$result. '<table>';
-        mysql_free_result($odpowiedz);
  
         mysql_close($link);
         return $result;
@@ -164,21 +162,19 @@ class KlienciService
         $search = array(":IDKLIENTA:");
         $replace = array($_GET['idKlienta']);
         $html = str_replace($search, $replace, $html);
-        
-        mysql_free_result($odpowiedz);
  
         mysql_close($link);
         return $html;
     }
     
-    function edytuj()
+    function edytujPotwierdz()
     {
         require_once "DTO/KlientDTO.php";
         $DTO = new KlientDTO();
         return($DTO->Edytuj($_GET['idKlienta'], $_GET['Login'], $_GET['Imie'], $_GET['Nazwisko'], $_GET['Adres'], $_GET['Email'], $_GET['Telefon']));
     }
     
-    function dodaj()
+    function dodajPotwierdz()
     {
         require_once "DTO/KlientDTO.php";
         $DTO = new KlientDTO();

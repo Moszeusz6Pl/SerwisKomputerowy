@@ -54,7 +54,6 @@ class ZlecenieDTO
         $query = $query . ')';
         
         //Wstawiam dane do bazy
-        mysql_free_result($result);
         if(($result = mysql_query($query))==false)
             return('Baza danych nie odpowiada na zapytanie '. $query);
         

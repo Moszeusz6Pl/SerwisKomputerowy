@@ -1,6 +1,6 @@
 <?php
 
-require_once "Facade/ZleceniaFacade.php";
+require_once "Facade/ZleceniaPracownikFacade.php";
 
 /**
  * Klasa odpowiedzialna za obsługę zdarzeń w podstronie Zlecenia dla Pracownika
@@ -11,55 +11,55 @@ class ZleceniaPracownikController
 {
     function indexKlient()
     {
-        $facade=new ZleceniaFacade();           
+        $facade=new ZleceniaPracownikFacade();           
         $facade->pokazKlient();
     }
     
     function index()
     {
-        $facade=new ZleceniaFacade();           
+        $facade=new ZleceniaPracownikFacade();           
         $facade->pokazPracownik();
     }
     
     function edytuj()
     {
-        $facade=new ZleceniaFacade();           
+        $facade=new ZleceniaPracownikFacade();           
         $facade->edytuj();
     }
     
     function edytujPotwierdz()
     {
-        $facade=new ZleceniaFacade();           
+        $facade=new ZleceniaPracownikFacade();           
         $facade->edytujPotwierdz();
     }
     
     function szukaj()
     {
-        $facade=new ZleceniaFacade();           
+        $facade=new ZleceniaPracownikFacade();           
         $facade->szukaj();
     }
     
     function szukajPotwierdz()
     {
-        $facade=new ZleceniaFacade();           
+        $facade=new ZleceniaPracownikFacade();           
         $facade->szukajPotwierdz();
     }
     
     function dodaj()
     {
-        $facade=new ZleceniaFacade();           
+        $facade=new ZleceniaPracownikFacade();           
         $facade->dodaj();
     }
     
     function dodajPotwierdz()
     {
-        $facade=new ZleceniaFacade();           
+        $facade=new ZleceniaPracownikFacade();           
         $facade->dodajPotwierdz();
     }
     
     function pokazKlienta()
     {
-        $facade=new KlientFacade();           
+        $facade=new KlientPracownikFacade();           
         $facade->szukajPotwierdz();
     }
     

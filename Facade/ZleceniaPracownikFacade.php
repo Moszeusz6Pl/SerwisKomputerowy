@@ -1,6 +1,6 @@
 <?php
 
-require_once "Service/ZleceniaService.php";
+require_once "Service/ZleceniaPracownikService.php";
 require_once "View/Gui.php";
 
 /**
@@ -8,11 +8,11 @@ require_once "View/Gui.php";
  *
  * @author Mateusz Jurasz
  */
-class ZleceniaFacade
+class ZleceniaPracownikFacade
 {
     function pokazKlient($error=NULL)
     {
-    $service = new ZleceniaService();
+    $service = new ZleceniaPracownikService();
     $wynik=$service->szukaj();   
         
     $gui=new Gui();
@@ -21,7 +21,7 @@ class ZleceniaFacade
     
     function pokazPracownik($error=NULL)
     {
-    $service = new ZleceniaService();
+    $service = new ZleceniaPracownikService();
     $wynik=$service->pokaz();   
         
     $gui=new Gui();
@@ -31,7 +31,7 @@ class ZleceniaFacade
     //to do
     function edytuj()
     {
-    $service = new ZleceniaService();
+    $service = new ZleceniaPracownikService();
     $wynik=$service->edytujWyswietl();
         
     $this->pokazPracownik($wynik);
@@ -39,7 +39,7 @@ class ZleceniaFacade
     
     function edytujPotwierdz()
     {
-        $service = new ZleceniaService();
+        $service = new ZleceniaPracownikService();
         if(($wynik=$service->edytuj())==1)          
             $this->pokazPracownik();
         else
@@ -60,7 +60,7 @@ class ZleceniaFacade
     
     function szukajPotwierdz()
     {
-        $service = new ZleceniaService();
+        $service = new ZleceniaPracownikService();
         $wynik=$service->szukaj();
         $gui=new Gui();
         $formularz =  file_get_contents("View/Pracownik/Zlecenia/Szukaj.html").$wynik;
@@ -76,7 +76,7 @@ class ZleceniaFacade
     
     function dodajPotwierdz()
     {
-        $service = new ZleceniaService();
+        $service = new ZleceniaPracownikService();
         if(($wynik=$service->dodaj())==1)
             $wynik=NULL;
         

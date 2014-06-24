@@ -1,6 +1,6 @@
 <?php
 
-require_once "Service/KlienciService.php";
+require_once "Service/KlienciPracownikService.php";
 require_once "View/Gui.php";
 
 /**
@@ -8,20 +8,20 @@ require_once "View/Gui.php";
  *
  * @author Mateusz Jurasz
  */
-class KlienciFacade
+class KlienciPracownikFacade
 {
     function pokaz($error=NULL)
     {
-    $service = new KlienciService();
+    $service = new KlienciPracownikService();
     $wynik=$service->pokaz();   
         
     $gui=new Gui();
     $gui->Show("View/Pracownik/Klienci.html", $wynik, $error);
     }
     
-    function edytuj()
+    function edytujWyswietl()
     {
-    $service = new KlienciService();
+    $service = new KlienciPracownikService();
     $wynik=$service->edytujWyswietl();
         
     $gui=new Gui();
@@ -30,8 +30,8 @@ class KlienciFacade
     
     function edytujPotwierdz()
     {
-        $service = new KlienciService();
-        if(($wynik=$service->edytuj())==1)          
+        $service = new KlienciPracownikService();
+        if(($wynik=$service->edytujPotwierdz())==1)          
             $this->pokaz();
         else
         {
@@ -42,7 +42,7 @@ class KlienciFacade
             
     }
     
-    function szukaj()
+    function szukajWyswietl()
     {
     $gui=new Gui();
     $formularz =  file_get_contents("View/Pracownik/Klienci/Szukaj.html");
@@ -51,14 +51,14 @@ class KlienciFacade
     
     function szukajPotwierdz()
     {
-        $service = new KlienciService();
-        $wynik=$service->szukaj();         
+        $service = new KlienciPracownikService();
+        $wynik=$service->szukajPotwierdz();         
         $gui=new Gui();
         $formularz =  file_get_contents("View/Pracownik/Klienci/Szukaj.html").'<br>'. $wynik;
         $gui->Show("View/Pracownik/Klienci.html", $formularz);           
     }
     
-    function dodaj()
+    function dodajWyswietl()
     {
     $gui=new Gui();
     $formularz =  file_get_contents("View/Pracownik/Klienci/Dodaj.html");
@@ -67,8 +67,8 @@ class KlienciFacade
     
     function dodajPotwierdz()
     {
-        $service = new KlienciService();
-        if(($wynik=$service->dodaj())==1)
+        $service = new KlienciPracownikService();
+        if(($wynik=$service->dodajPotwierdz())==1)
             $wynik=NULL;
         
         $this->pokaz($wynik);           
