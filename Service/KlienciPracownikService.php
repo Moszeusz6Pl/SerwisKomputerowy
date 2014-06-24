@@ -146,21 +146,27 @@ class KlienciPracownikService
         $search = array(":LOGIN:");
         $replace = array($wiersz[0]);
         $html = str_replace($search, $replace, $html);
+        
         $search = array(":IMIE:");
         $replace = array($wiersz[1]);
         $html = str_replace($search, $replace, $html);
+        
         $search = array(":NAZWISKO:");
         $replace = array($wiersz[2]);
         $html = str_replace($search, $replace, $html);
+        
         $search = array(":ADRES:");
         $replace = array($wiersz[3]);
         $html = str_replace($search, $replace, $html);
+        
         $search = array(":EMAIL:");
         $replace = array($wiersz[4]);
         $html = str_replace($search, $replace, $html);
+        
         $search = array(":TELEFON:");
         $replace = array($wiersz[5]);
         $html = str_replace($search, $replace, $html);
+        
         $search = array(":IDKLIENTA:");
         $replace = array($_GET['idKlienta']);
         $html = str_replace($search, $replace, $html);

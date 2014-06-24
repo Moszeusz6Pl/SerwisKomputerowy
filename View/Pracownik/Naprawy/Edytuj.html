@@ -1,0 +1,24 @@
+<form name="input" action="index.php" method="get">
+          Stan:
+	  <select name="Stan" size="3">
+            <option :PRZYJETE:>Przyjete</option>
+            <option :WTOKU:>WToku</option>
+            <option :ZAKONCZONE:>Zakonczone</option>
+          </select>  <br/>
+          Id Zlecenia: 
+	  <input type="text" id="idZlecenia" name="idZlecenia" maxlength="11" value = :IDZLECENIA:> <br/>
+          Id Sprzętu:
+	  <input type="text" id="idSprzetu" name="idSprzetu" maxlength="11" value = :IDZSPRZETU:> <br/>
+          Opis:
+	  <input type="text" id="Opis" name="Opis" maxlength="500" value = :OPIS:> <br/>
+          Cena:
+	  <input type="text" id="Cena" name="Cena" maxlength="500" value = :CENA:> <br/>
+          Id Czesci:
+	  <input type="text" id="Rabat" name="idCzesci" maxlength="11" value = :IDCZESCI:> <br/>
+          
+          <input type="hidden" name="idNaprawy" value=":IDNAPRAWY:" />
+          
+          <input type="hidden" name="subpage" value="NaprawyPracownik" />
+          
+	  <sub><button type=”submit” name="action" value="edytujPotwierdz">Potwierdź zmiany</button></br></sub>
+</form>

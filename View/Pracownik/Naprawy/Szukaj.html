@@ -1,0 +1,24 @@
+<form name="input" action="index.php" method="get">
+          Id:
+	  <input type="text" id="idNaprawy" name="idNaprawy" maxlength="11"> <br/>
+          Stan:
+	  <select name="Stan" size="3">
+            <option selected>Przyjete</option>
+            <option>W Toku</option>
+            <option>Zakonczone</option>
+          </select>  <br/>
+          Id Zlecenia: 
+	  <input type="text" id="idZlecenia" name="idZlecenia" maxlength="11" value = :IDZLECENIA:> <br/>
+          Id Sprzętu:
+	  <input type="text" id="idSprzetu" name="idSprzetu" maxlength="11"> <br/>
+          Opis:
+	  <input type="text" id="Opis" name="Opis" maxlength="500"> <br/>
+          Cena:
+	  <input type="text" id="Cena" name="Cena" maxlength="500"> <br/>
+          Id Czesci:
+	  <input type="text" id="idCzesci" name="idCzesci" maxlength="11"> <br/>
+              
+          <input type="hidden" name="subpage" value="NaprawyPracownik" />
+          
+	  <sub><button type=”submit” name="action" value="szukajPotwierdz">Szukaj</button></br></sub>
+</form>

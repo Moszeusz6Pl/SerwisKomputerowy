@@ -42,7 +42,7 @@ class ZleceniaPracownikService
 
         //Tworzenie zapytania
         $count = 0;
-        $query = 'SELECT idZlecenia, Data, Status, idKlienta, Cena, CzasNaprawy, Rabat FROM Zlecenia';
+        $query = 'SELECT * FROM Zlecenia';
         
         //Wyszukiwanie id
         if(!empty($_GET['idZlecenia']))
@@ -127,7 +127,6 @@ class ZleceniaPracownikService
         return $result;
     }
     
-    //to do
     function edytujWyswietl()
     {
         if(($link = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD))==false)
@@ -172,15 +171,19 @@ class ZleceniaPracownikService
         $search = array(":IDKLIENTA:");
         $replace = array($wiersz[2]);
         $html = str_replace($search, $replace, $html);
+        
         $search = array(":CENA:");
         $replace = array($wiersz[3]);
         $html = str_replace($search, $replace, $html);
+        
         $search = array(":CZASNAPRAWY:");
         $replace = array($wiersz[4]);
         $html = str_replace($search, $replace, $html);
+        
         $search = array(":RABAT:");
         $replace = array($wiersz[5]);
         $html = str_replace($search, $replace, $html);
+        
         $search = array(":IDZLECENIA:");
         $replace = array($_GET['idZlecenia']);
         $html = str_replace($search, $replace, $html);
