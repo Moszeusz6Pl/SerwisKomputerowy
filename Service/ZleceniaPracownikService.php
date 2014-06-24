@@ -22,7 +22,7 @@ class ZleceniaPracownikService
         {
               $result=$result. '<tr><td>'. $wiersz[0] .'</td><td>'. $wiersz[1] .'</td><td>'
                 . $wiersz[2] .'</td><td>'. $wiersz[3] .'</td><td>'. $wiersz[4] .'</td><td>'. $wiersz[5] .'</td><td>'.
-                $wiersz[6] .'</td><td> <a href="index.php?subpage=zleceniaPracownik&action=edytuj&idZlecenia='. $wiersz[0] .'">Edytuj</a> </td>'
+                $wiersz[6] .'</td><td> <a href="index.php?subpage=zleceniaPracownik&action=edytujWyswietl&idZlecenia='. $wiersz[0] .'">Edytuj</a> </td>'
                 . '<td> <a href="index.php?subpage=klienciPracownik&action=szukajPotwierdz&idKlienta='. $wiersz[3] .'">Pokaż klienta</a> </td>'
                 . '<td> <a href="index.php?subpage=naprawyPracownik&action=szukajPotwierdz&idZlecenia='. $wiersz[0] .'">Pokaż naprawy</a> </td></tr>';
         }
@@ -32,7 +32,7 @@ class ZleceniaPracownikService
         return $result;
     }
     
-    function szukaj()
+    function szukajPotwierdz()
     {
         if(($link = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD))==false)
             return('Brak dostepu do serwera bazy danych');
@@ -148,23 +148,25 @@ class ZleceniaPracownikService
         $replace = array($wiersz[0]);
         $html = str_replace($search, $replace, $html);
         
+        echo $wiersz[1];
+        
         $search = array(":PRZYJETE:");
         if($wiersz[1]=="Przyjete")           
-            $replace = array("slected");
+            $replace = array("selected");
         else
             $replace = array(""); 
         $html = str_replace($search, $replace, $html);
         
         $search = array(":CZEKA:");
-        if($wiersz[1]=="'CzekaNaOdbior")           
-            $replace = array("slected");
+        if($wiersz[1]=="CzekaNaOdbior")           
+            $replace = array("selected");
         else
             $replace = array(""); 
         $html = str_replace($search, $replace, $html);
         
         $search = array(":ZAKONCZONE:");
         if($wiersz[1]=="Zakonczone")           
-            $replace = array("slected");
+            $replace = array("selected");
         else
             $replace = array(""); 
         $html = str_replace($search, $replace, $html);
@@ -189,14 +191,33 @@ class ZleceniaPracownikService
         return $html;
     }
     
-    function edytuj()
+    function edytujPotwierdz()
     {
         require_once "DTO/ZlecenieDTO.php";
         $DTO = new ZlecenieDTO();
         return($DTO->Edytuj($_GET['idZlecenia'], $_GET['Data'], $_GET['Status'], $_GET['idKlienta'], $_GET['Cena'], $_GET['CzasNaprawy'], $_GET['Rabat']));
     }
     
-    function dodaj()
+    function dodajWyswietl()
+    {
+        $search = array(":IDKLIENTA:");
+        
+        if(isset($_GET['idKlienta']))  
+        {
+            $replace = array($_GET['idKlienta']);
+        }
+        else
+            $replace = array('');
+        
+        echo $replace[0];
+        echo $search[0];
+        
+        $html =  file_get_contents("View/Pracownik/Zlecenia/Dodaj.html");
+        $html = str_replace($search, $replace, $html);
+        return $html;
+    }
+    
+    function dodajPotwierdz()
     {
         require_once "DTO/ZlecenieDTO.php";
         $DTO = new ZlecenieDTO();

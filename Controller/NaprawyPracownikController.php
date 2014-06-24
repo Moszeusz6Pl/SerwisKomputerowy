@@ -1,61 +1,60 @@
 <?php
 
-require_once "Facade/KlienciPracownikFacade.php";
+require_once "Facade/NaprawyPracownikFacade.php";
 
 /**
- * Klasa odpowiedzialna za obsługę zdarzeń w podstronie Klienci dla Pracownika
+ * Klasa odpowiedzialna za obsługę zdarzeń w podstronie Naprawy dla Pracownika
  *
  * @author Mateusz Jurasz
  */
-class KlienciPracownikController
-{    
+class NaprawyPracownikController
+{
     function index()
     {
-        $facade=new KlienciPracownikFacade();           
+        $facade=new NaprawyPracownikFacade();           
         $facade->pokaz();
     }
     
     function edytujWyswietl()
     {
-        $facade=new KlienciPracownikFacade();           
+        $facade=new NaprawyPracownikFacade();           
         $facade->edytujWyswietl();
     }
     
     function edytujPotwierdz()
     {
-        $facade=new KlienciPracownikFacade();           
+        $facade=new NaprawyPracownikFacade();           
         $facade->edytujPotwierdz();
     }
     
     function szukajWyswietl()
     {
-        $facade=new KlienciPracownikFacade();           
+        $facade=new NaprawyPracownikFacade();           
         $facade->szukajWyswietl();
     }
     
     function szukajPotwierdz()
     {
-        $facade=new KlienciPracownikFacade();           
+        $facade=new NaprawyPracownikFacade();           
         $facade->szukajPotwierdz();
     }
     
     function dodajWyswietl()
     {
-        $facade=new KlienciPracownikFacade();           
+        $facade=new NaprawyPracownikFacade();           
         $facade->dodajWyswietl();
     }
     
     function dodajPotwierdz()
     {
-        $facade=new KlienciPracownikFacade();           
+        $facade=new NaprawyPracownikFacade();           
         $facade->dodajPotwierdz();
     }
     
-    //to do
-    function pokazZlecenia()
+    function pokazZlecenie()
     {
-        $facade=new KlienciPracownikFacade();           
-        $facade->dodajPotwierdz();
+        $facade=new ZleceniaPracownikFacade();           
+        $facade->szukajPotwierdz();
     }
     
     function wyloguj()

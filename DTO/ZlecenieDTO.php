@@ -100,9 +100,7 @@ class ZlecenieDTO
         //Zmiana Statusu
         if(strlen($Status)>0)
         {
-            $Status = strtolower($Status);
-            $Status[0] = strtoupper($Status[0]);
-            if($Status == 'Przyjete' || $Status == Zakonczone || $Status == CzekaNaOdbior)
+            if(($Status == 'Przyjete') || ($Status == 'Zakonczone') || ($Status == 'CzekaNaOdbior'))
             {
                 if($count == 0)
                     $query = $query . ' Set Status = "'.$Status.'"';
@@ -115,7 +113,6 @@ class ZlecenieDTO
                 
             }
         }
-        
         //Zmiana ID Klienta
         if(strlen($idKlienta)>0)
         {

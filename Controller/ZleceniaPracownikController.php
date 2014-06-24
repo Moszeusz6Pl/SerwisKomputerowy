@@ -9,22 +9,16 @@ require_once "Facade/ZleceniaPracownikFacade.php";
  */
 class ZleceniaPracownikController
 {
-    function indexKlient()
-    {
-        $facade=new ZleceniaPracownikFacade();           
-        $facade->pokazKlient();
-    }
-    
     function index()
     {
         $facade=new ZleceniaPracownikFacade();           
-        $facade->pokazPracownik();
+        $facade->pokaz();
     }
     
-    function edytuj()
+    function edytujWyswietl()
     {
         $facade=new ZleceniaPracownikFacade();           
-        $facade->edytuj();
+        $facade->edytujWyswietl();
     }
     
     function edytujPotwierdz()
@@ -33,10 +27,10 @@ class ZleceniaPracownikController
         $facade->edytujPotwierdz();
     }
     
-    function szukaj()
+    function szukajWyswietl()
     {
         $facade=new ZleceniaPracownikFacade();           
-        $facade->szukaj();
+        $facade->szukajWyswietl();
     }
     
     function szukajPotwierdz()
@@ -45,10 +39,10 @@ class ZleceniaPracownikController
         $facade->szukajPotwierdz();
     }
     
-    function dodaj()
+    function dodajWyswietl()
     {
         $facade=new ZleceniaPracownikFacade();           
-        $facade->dodaj();
+        $facade->dodajWyswietl();
     }
     
     function dodajPotwierdz()

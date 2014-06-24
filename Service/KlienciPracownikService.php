@@ -16,14 +16,15 @@ class KlienciPracownikService
             return('Nie można połączyć się z bazą danych');
 
         $query = 'SELECT idKlienta, Login, Imie, Nazwisko, Adres, Email, Telefon FROM Klienci';
-        $result='<table border="5"><th>Id</th><th>Login</th><th>Imie</th><th>Nazwisko</th><th>Adres</th><th>e-mail</th><th>telefon</th><th>Edycja</th><th>Pokaż zlecenia</th>';
+        $result='<table border="5"><th>Id</th><th>Login</th><th>Imie</th><th>Nazwisko</th><th>Adres</th><th>e-mail</th><th>telefon</th><th>Edycja</th><th>Pokaż zlecenia</th><th>Dodaj zlecenie</th>';
         $odpowiedz = mysql_query($query);
         while ($wiersz = mysql_fetch_row($odpowiedz)) 
         {
               $result=$result. '<tr><td>'. $wiersz[0] .'</td><td>'. $wiersz[1] .'</td><td>'
                 . $wiersz[2] .'</td><td>'. $wiersz[3] .'</td><td>'. $wiersz[4] .'</td><td>'. $wiersz[5] .'</td><td>'.
-                $wiersz[6] .'</td><td> <a href="index.php?subpage=klienciPracownik&action=edytujWyswietl&idKlienta='. $wiersz[0] .'">Edytuj</a> </td>'
-                . '<td> <a href="index.php?subpage=zleceniaPracownik&action=szukajPotwierdz&idKlienta='. $wiersz[0] .'">Pokaż zlecenia</a> </td></tr>' ;
+                $wiersz[6] .'</td><td> <a href="index.php?subpage=klienciPracownik&action=edytujWyswietl&idKlienta='. $wiersz[0] .'">Edytuj</a> </td>
+                 <td> <a href="index.php?subpage=zleceniaPracownik&action=szukajPotwierdz&idKlienta='. $wiersz[0] .'">Pokaż zlecenia</a> </td>'
+                . '<td> <a href="index.php?subpage=zleceniaPracownik&action=dodajWyswietl&idKlienta='. $wiersz[0] .'">Dodaj zlecenie</a> </td></tr>' ;
         }
         $result=$result. '<table>';
  
@@ -110,14 +111,15 @@ class KlienciPracownikService
             $count = $count + 1;
         }
         
-        $result='<table border="5"><th>Id</th><th>Login</th><th>Imie</th><th>Nazwisko</th><th>Adres</th><th>e-mail</th><th>telefon</th><th>Edycja</th><th>Pokaż zlecenia</th>';
+        $result='<table border="5"><th>Id</th><th>Login</th><th>Imie</th><th>Nazwisko</th><th>Adres</th><th>e-mail</th><th>telefon</th><th>Edycja</th><th>Pokaż zlecenia</th><th>Dodaj zlecenie</th>';
         $odpowiedz = mysql_query($query);
         while ($wiersz = mysql_fetch_row($odpowiedz)) 
         {
               $result=$result. '<tr><td>'. $wiersz[0] .'</td><td>'. $wiersz[1] .'</td><td>'
                 . $wiersz[2] .'</td><td>'. $wiersz[3] .'</td><td>'. $wiersz[4] .'</td><td>'. $wiersz[5] .'</td><td>'.
                 $wiersz[6] .'</td><td> <a href="index.php?subpage=klienciPracownik&action=edytuj&idKlienta='. $wiersz[0] .'">Edytuj</a> </td>'
-                . '<td> <a href="index.php?subpage=zleceniaPracownik&action=szukajPotwierdz&idKlienta='. $wiersz[0] .'">Pokaż zlecenia</a> </td></tr>' ;
+                . '<td> <a href="index.php?subpage=zleceniaPracownik&action=szukajPotwierdz&idKlienta='. $wiersz[0] .'">Pokaż zlecenia</a> </td>'
+                . '<td> <a href="index.php?subpage=zleceniaPracownik&action=dodajWyswietl&idKlienta='. $wiersz[0] .'">Dodaj zlecenie</a> </td></tr>';
         }
         $result=$result. '<table>';
  
